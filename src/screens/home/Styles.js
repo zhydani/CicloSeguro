@@ -8,11 +8,18 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#FF5D8F',
-        borderRadius: 50,
-        width: 90,
-        height: 90,
+        borderRadius: 60,
+        width: 120,
+        height: 120,
         alignItems: 'center',
         justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
         elevation: 6,
     },
 });  

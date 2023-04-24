@@ -98,7 +98,7 @@ const HomeContent = () => {
       />
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-          <Icon name="location-pin" size={40} color="white"/>
+          <Icon name="location-pin" size={60} color="white"/>
         </TouchableOpacity>
         
         <Load control={load} />
