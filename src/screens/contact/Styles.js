@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     },
     buttonClose: {
         marginTop: 20,
+        marginBottom: 0,
         width: 100,
         backgroundColor: '#FF5D8F',
     },
