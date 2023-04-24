@@ -66,6 +66,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
+    // close btn
+    closeBtn: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        padding: 4,
+    },
+
     // input modal
     inputView: {
         flexDirection: 'row', 
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         height: 40,
         width: 230,
-        margin: 12,
+        marginVertical: 15,
         borderWidth: 1,
         borderColor: "#FF5D8F",
         borderRadius: 50,

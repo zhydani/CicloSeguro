@@ -1,6 +1,7 @@
 import * as Contacts from 'expo-contacts';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import IconClose from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { keyExtractor } from '../../controllers/ContactController';
@@ -60,6 +61,9 @@ function ModalContacts({ onAddContact }) {
   }
 
   useEffect(() => {
+    if (!modalVisible) {
+      setSearchText('');
+    }
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === 'granted') {
@@ -87,7 +91,7 @@ function ModalContacts({ onAddContact }) {
         }
       }
     })();
-  }, []);
+  }, [modalVisible]);
 
   function openContactsModal() {
     setModalVisible(true);
@@ -115,6 +119,9 @@ function ModalContacts({ onAddContact }) {
       <Modal style={styles.centeredView} animationType="slide" visible={modalVisible} transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <TouchableOpacity style={styles.closeBtn} onPress={() => setModalVisible(false)}>
+                <IconClose name="close" size={25} color="black"/>
+            </TouchableOpacity>
             <View style={styles.inputView}>
               <Ionicons name="search" size={20} color="#ccc" />
               <TextInput
