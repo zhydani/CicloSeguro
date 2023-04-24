@@ -1,12 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-// import Geolocation from 'react-native-geolocation-service';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HeaderComponent from "../../components/HeaderComponent";
 import Alert from '../../components/default/alert/Alert';
 import Load from '../../components/default/load/Load';
-// import requestPermission from "../../utils/LocalizationPermission";
 import styles from './Styles';
 
 
@@ -19,16 +18,29 @@ const HomeContent = () => {
   const [iconColorAlert, setIconColorAlert] = useState(null);
 
   // Load
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(true)
 
-  // latitude, longitude e data para inserir no firebase
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  // data para inserir no firebase
   const [dateTime, setDateTime] = useState(new Date().toISOString());
+
+  // localizacao expo location
+  const [location, setLocation] = useState(null);
   
   useEffect(() => {
-    // requestPermission();
+    (async () => {
+      try {
+        await Location.requestForegroundPermissionsAsync();
+        const { coords } = await Location.getCurrentPositionAsync();
+        setLocation(coords);
+        setLoad(false);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
+
+  
+  console.log(location);
   
   const handleButtonPress = async () => {
     const contacts = await getSavedContacts();
@@ -87,6 +99,12 @@ const HomeContent = () => {
     }
   }
 
+  if (load) {
+    return (
+      <Load control={load} />
+    );
+  }
+
   return (
     <>
       <Alert 
@@ -100,8 +118,6 @@ const HomeContent = () => {
         <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
           <Icon name="location-pin" size={60} color="white"/>
         </TouchableOpacity>
-        
-        <Load control={load} />
       </View>
     </>
   );

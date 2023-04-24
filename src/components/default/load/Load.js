@@ -13,17 +13,17 @@ function Load(props) {
 
   if(control){
 
-  return (
-    <View style={styles.container}>
-      <ActivityIndicator 
-        size={'large'} 
-        color={'white'}
-      />
-      <Text style={styles.label}>
-        Enviando mensagens...
-      </Text>
-    </View>
-  )
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator 
+          size={'large'} 
+          color={'#FF5D8F'}
+        />
+        <Text style={styles.label}>
+          Carregando localização...
+        </Text>
+      </View>
+    )
 
   }else{
 
