@@ -8,7 +8,7 @@ const ContactItem = ({contact}) => {
             <View style={styles.imgCon}>
                 <View style={styles.placeholder}>
                 <Text style={styles.txt}>
-                    {contact?.name[0]}
+                    {contact?.name[0].toUpperCase()}
                 </Text>
                 </View>
             </View>
