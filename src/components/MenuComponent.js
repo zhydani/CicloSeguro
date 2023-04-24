@@ -16,9 +16,9 @@ function Menu({ navigation }) {
                         <Text style={styles.menuItemText}>Tela Inicial</Text>
                     </View>
                 </TouchableOpacity>
-                <Divider style={{ marginBottom: 10 }} leadingInset={45} />
+                <Divider style={{ marginBottom: 10 }} leadingInset={40} />
                 <TouchableOpacity onPress={() => navigation.navigate('ContactManageScreen')}>
-                    <View style={styles.menuItem}>
+                    <View style={styles.menuItemContact}>
                         <Icon name="contacts" size={24} color="white" />
                         <Text style={styles.menuItemText}>Contatos</Text>
                     </View>
@@ -36,6 +36,7 @@ function Menu({ navigation }) {
 const styles = StyleSheet.create({
     menu:{
         padding: 4,
+        paddingTop: 0
     },
     listItem:{
         backgroundColor: "#FF5D8F",
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FF5D8F",
     },
     drawerText: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: "white",
         marginBottom: 20,
@@ -53,11 +54,17 @@ const styles = StyleSheet.create({
     menuItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 16,
+        marginBottom: 20,
+    },
+    menuItemContact: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 10,
     },
     menuItemText: {
         marginLeft: 16,
-        fontSize: 18,
+        fontSize: 20,
         color: "white",
     },
 });

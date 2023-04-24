@@ -12,10 +12,13 @@ import styles from './Styles';
 function ModalContacts({ onAddContact }) {
   // modal visibility
   const [modalVisible, setModalVisible] = useState(false);
+
   // contacts list
   const [contacts, setContacts] = useState([]);
+
   // search
   const [searchText, setSearchText] = useState('');
+  
   // load
   // const [load, setLoad] = useState(true)
 

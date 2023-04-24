@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#FF5D8F",
     },
     appBar: {
-        height: 80,
+        height: 40,
         padding: 10,
     },
     title: {
-        fontSize: 30,
+        fontSize: 35,
         fontWeight: 'bold'
     },
 });

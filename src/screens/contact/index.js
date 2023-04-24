@@ -117,16 +117,15 @@ function ContactManageContent() {
             <View style={styles.contactGroup}>
               <View style={styles.imgCon}>
                   <View style={styles.placeholder}>
-                  <Text style={styles.txt}>{item?.givenName[0]}</Text>
+                  <Text style={styles.txt}>{item?.name[0]}</Text>
                   </View>
               </View>
               <View style={styles.contactDat}>
                   <Text style={styles.name}>
-                  {item?.givenName} {item?.middleName && item.middleName + ' '}
-                  {item?.familyName}
+                    {item?.name}
                   </Text>
                   <Text style={styles.phoneNumber}>
-                  {item?.phoneNumbers[0]?.number}
+                  {item?.number}
                   </Text>
               </View>
             </View>
