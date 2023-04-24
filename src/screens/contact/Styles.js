@@ -40,14 +40,27 @@ const styles = StyleSheet.create({
     },
     // button open modal
     button: {
-        borderRadius: 20,
+        borderRadius: 30,
         padding: 10,
-        elevation: 4,
+        marginBottom: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+        backgroundColor: '#FF5D8F',
     },
     buttonOpen: {
         backgroundColor: '#FF5D8F',
     },
     textStyle: {
+        fontSize: 20,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',

@@ -1,8 +1,8 @@
 import * as Contacts from 'expo-contacts';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { keyExtractor } from '../../controllers/ContactController';
 import ContactItem from './ContactItem';
 import styles from './Styles';
@@ -109,7 +109,7 @@ function ModalContacts({ onAddContact }) {
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={openContactsModal}>
-        <Text style={styles.textStyle}><Icon name="plus" size={18} color="white"/> Adicionar Contato</Text>
+        <Text style={styles.textStyle}><Icon name="plus" size={20} color="white"/> Adicionar Contato</Text>
       </Pressable>
       <Modal style={styles.centeredView} animationType="slide" visible={modalVisible} transparent>
         <View style={styles.centeredView}>
