@@ -1,9 +1,9 @@
+import * as Contacts from 'expo-contacts';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getAllContacts, keyExtractor } from '../../controllers/ContactController';
-// import requestContactsPermission from "../../utils/ContactPermission";
+import { keyExtractor } from '../../controllers/ContactController';
 import ContactItem from './ContactItem';
 import styles from './Styles';
 // import Load from '../../components/default/load/Load';
@@ -29,20 +29,40 @@ function ModalContacts({ onAddContact }) {
   }
 
   useEffect(() => {
-    // requestContactsPermission();
-    getAllContacts().then(contacts => {
-      if (contacts.length > 0) {
-        setContacts(contacts);
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers],
+        });
+
+        if (data && data.length > 0) {
+          const contacts = data.map(contact => {
+            if(contact.phoneNumbers){
+              return {
+                name: contact.name,
+                number: contact.phoneNumbers[0].number,
+              };
+            }else{
+              return {
+                name: contact.name,
+                number: "vazio",
+              };
+            }
+          })
+          setContacts(contacts);
+          console.log(contacts[0])
+        }
       }
-    })
+    })();
   }, []);
 
   function openContactsModal() {
     setModalVisible(true);
   };
   
-  const renderItem = ({item, index}) => {
-    if (!searchText || item?.givenName.toLowerCase().includes(searchText.toLowerCase())) {
+  const renderItem = ({item}) => {
+    if (!searchText || item?.name.toLowerCase().includes(searchText.toLowerCase())) {
       return (
         <TouchableOpacity onPress={() => handleAddContact(item)}>
           <ContactItem contact={item} />

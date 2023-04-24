@@ -31,6 +31,17 @@ function ContactManageContent() {
       }
     };
     getContacts();
+
+    // metodo para limpar a lista quando der pau
+    // const clearList = async () => {
+    //   try {
+    //     await AsyncStorage.clear();
+    //     console.log('Lista limpa com sucesso!');
+    //   } catch (error) {
+    //     console.log('Erro ao limpar a lista:', error);
+    //   }
+    // }
+    // clearList();
   }, []);
   
   const iconAlertSuccess = () => {
