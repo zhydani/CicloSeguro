@@ -11,7 +11,6 @@ import styles from './Styles';
 
 
 const HomeContent = () => {
-
   // Alert 
   const [controlAlert, setControlAlert] = useState(false);
   const [labelAlert, setLabelAlert] = useState(null);
@@ -19,38 +18,32 @@ const HomeContent = () => {
   const [iconColorAlert, setIconColorAlert] = useState(null);
 
   // Load
-  const [load, setLoad] = useState(true)
+  const [load, setLoad] = useState(false)
 
   // data para inserir no firebase
   const [dateTime, setDateTime] = useState(new Date().toISOString());
-
-  // localizacao expo location
-  const [location, setLocation] = useState(null);
   
   useEffect(() => {
-    (async () => {
-      try {
-        await Location.requestForegroundPermissionsAsync();
-        const { coords } = await Location.getCurrentPositionAsync();
-        setLocation(coords);
-        setLoad(false);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    
   }, []);
 
-  
-  // console.log(location);
+  function messageWhatsapp(latitude, longitude){
+    const message = `Socorro! Estou em perigo. Minha localização é:\n\nMinha localização atual: https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    return message;
+  }
   
   const handleButtonPress = async () => {
+    setLoad(true);
+    const location = await getLocation();
+    
     const contacts = await getSavedContacts();
     const numbers = contacts.map((c) => c?.number);
-    const message = `Socorro! Estou em perigo. Minha localização é:\n\nMinha localização atual: https://www.google.com/maps/search/?api=1&query=${location.latitude},${location.longitude}`;
-
-    console.log(numbers.join(','))
     
-    let url = `whatsapp://send?text=${encodeURIComponent(message)}&phone=+5563999959865`;
+    let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
+    setLabelAlert('Mensagem enviada');
+    setIconAlert('send');
+    setIconColorAlert('#FF5D8F');
+    setControlAlert(true);
     Linking.openURL(url);
   };
 
@@ -61,6 +54,18 @@ const HomeContent = () => {
         return JSON.parse(contacts);
       }
       return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+
+  async function getLocation() {
+    try {
+      await Location.requestForegroundPermissionsAsync();
+      const { coords } = await Location.getCurrentPositionAsync();
+      setLoad(false);
+      return coords;
     } catch (error) {
       console.log(error);
       return [];

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     iconAlert: {
         textAlign: 'center',
         textAlignVertical: 'center',
+        marginBottom: 10,
     },
     label: {
         color: 'black',
