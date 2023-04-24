@@ -64,19 +64,20 @@ function ModalContacts({ onAddContact }) {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers],
-          sort: true
+          fields: [Contacts.Fields.PhoneNumbers]
         });
 
         if (data && data.length > 0) {
           const contacts = data.map(contact => {
-            if(contact.phoneNumbers){
+            if(contact.phoneNumbers && contact.phoneNumbers.length > 0){
               return {
+                id: contact.id,
                 name: contact.name,
                 number: formatPhoneNumber(contact.phoneNumbers[0].digits),
               };
             }else{
               return {
+                id: contact.id,
                 name: contact.name,
                 number: "Sem número",
               };

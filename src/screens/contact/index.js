@@ -56,7 +56,7 @@ function ContactManageContent() {
 
   const handleAddContact = async (newContact) => {
     const contactExists = contacts.find(
-      contact => contact.recordID === newContact.recordID
+      contact => contact.id === newContact.id
     );
     
     if (contactExists) {
