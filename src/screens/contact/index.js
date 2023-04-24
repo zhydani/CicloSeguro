@@ -117,7 +117,7 @@ function ContactManageContent() {
             <View style={styles.contactGroup}>
               <View style={styles.imgCon}>
                   <View style={styles.placeholder}>
-                  <Text style={styles.txt}>{item?.name[0]}</Text>
+                  <Text style={styles.txt}>{item?.name[0].toUpperCase()}</Text>
                   </View>
               </View>
               <View style={styles.contactDat}>
