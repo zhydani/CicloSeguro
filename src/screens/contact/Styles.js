@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
     // item contato
     contactCon: {
         flex: 1,
-        width: 500,
+        width: 240,
         flexDirection: 'row',
-        padding: 5,
+        padding: 6,
         borderBottomWidth: 0.5,
         borderBottomColor: '#d9d9d9',
     },
