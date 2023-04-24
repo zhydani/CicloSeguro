@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HeaderComponent from "../../components/HeaderComponent";
 import Alert from '../../components/default/alert/Alert';
 import ListEmpty from '../../components/default/empty/ListEmpty';
+import { formatPhoneNumber } from '../../utils/FormatNumber';
 import ModalContacts from './ModalContacts';
 import styles from './StylesIndex';
 
@@ -125,7 +126,7 @@ function ContactManageContent() {
                     {item?.name}
                   </Text>
                   <Text style={styles.phoneNumber}>
-                  {item?.number}
+                  {formatPhoneNumber(item?.number)}
                   </Text>
               </View>
             </View>

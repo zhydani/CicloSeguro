@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { formatPhoneNumber } from '../../utils/FormatNumber';
 import styles from './Styles';
 
 const ContactItem = ({contact}) => {
@@ -17,7 +18,7 @@ const ContactItem = ({contact}) => {
                     {contact?.name}
                 </Text>
                 <Text style={styles.phoneNumber}>
-                    {contact?.number}
+                    {formatPhoneNumber(contact?.number)}
                 </Text>
             </View>
         </View>
