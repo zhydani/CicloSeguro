@@ -1,13 +1,25 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
+import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HeaderComponent from "../../components/HeaderComponent";
 import Alert from '../../components/default/alert/Alert';
 import Load from '../../components/default/load/Load';
+import db from '../../config/firebaseconfig';
 import styles from './Styles';
+
+const colRef = collection(db, "ocorrencias");
+// getDocs(colRef)
+//     .then((snapshot) => {
+//       let collection = []
+//       snapshot.docs.forEach((doc) => {
+//           collection.push({...doc.data(), id: doc.id })
+//           console.log(collection)
+//        })
+//     })
 
 
 const HomeContent = () => {
@@ -16,6 +28,9 @@ const HomeContent = () => {
   const [labelAlert, setLabelAlert] = useState(null);
   const [iconAlert, setIconAlert] = useState(null);
   const [iconColorAlert, setIconColorAlert] = useState(null);
+
+  
+  
 
   // Load
   const [load, setLoad] = useState(false)
@@ -45,6 +60,21 @@ const HomeContent = () => {
     setIconColorAlert('#FF5D8F');
     setControlAlert(true);
     Linking.openURL(url);
+
+    const data = {
+      data: new Date(),
+      descricao: "Essa é uma ocorrência de teste",
+      latitude: location.latitude,
+      longitude: location.longitude,
+    };
+
+    addDoc(colRef, data)
+      .then((docRef) => {
+        console.log("Documento adicionado com sucesso:", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Erro ao adicionar documento:", error);
+      });
   };
 
   async function getSavedContacts() {

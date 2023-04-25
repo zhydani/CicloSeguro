@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -14,15 +14,5 @@ const firebaseConfig = {
   
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
-const colRef = collection(db, "ocorrencias");
-getDocs(colRef)
-    .then((snapshot) => {
-      let collection = []
-      snapshot.docs.forEach((doc) => {
-          collection.push({...doc.data(), id: doc.id })
-          console.log(collection)
-       })
-    })
-
     
 export default db;
