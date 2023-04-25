@@ -28,7 +28,7 @@ const HomeContent = () => {
   }, []);
 
   function messageWhatsapp(latitude, longitude){
-    const message = `Socorro! Estou em perigo. Minha localização é:\n\nMinha localização atual: https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    const message = `Socorro! Estou em perigo.\n\nMinha localização é: https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     return message;
   }
   
