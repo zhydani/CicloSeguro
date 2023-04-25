@@ -12,6 +12,7 @@ import db from '../../config/firebaseconfig';
 import styles from './Styles';
 
 const colRef = collection(db, "ocorrencias");
+
 // getDocs(colRef)
 //     .then((snapshot) => {
 //       let collection = []
@@ -46,6 +47,22 @@ const HomeContent = () => {
     const message = `Socorro! Estou em perigo.\n\nMinha localização é: https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     return message;
   }
+
+  // gera localizacao aleatoria
+  function generateRandomLocation() {
+    // Define a faixa de latitude e longitude para Palmas, Tocantins
+    const latMin = -10.3667;
+    const latMax = -10.1414;
+    const longMin = -48.4078;
+    const longMax = -48.2094;
+  
+    // Gera números aleatórios dentro da faixa de latitude e longitude
+    const lat = Math.random() * (latMax - latMin) + latMin;
+    const long = Math.random() * (longMax - longMin) + longMin;
+  
+    // Retorna um objeto com as coordenadas da localização aleatória gerada
+    return { latitude: lat, longitude: long };
+  }
   
   const handleButtonPress = async () => {
     setLoad(true);
@@ -53,6 +70,7 @@ const HomeContent = () => {
     
     const contacts = await getSavedContacts();
     const numbers = contacts.map((c) => c?.number);
+    // const randomLocation = generateRandomLocation();
     
     let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
     setLabelAlert('Mensagem enviada');
