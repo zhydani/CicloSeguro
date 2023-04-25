@@ -7,7 +7,7 @@ Trabalho de Conclusão do Curso de Sistemas de Informação da UNITINS
 * XCode 14.0
 * Figma 
 * JavaScript e React Native
-* expo
+* expo e yarn
 * [@react-native-material](https://www.react-native-material.com/)
 
 ## Resumo
@@ -30,7 +30,7 @@ $ git clone https://github.com/zhydani/CicloSeguro.git
 
 Instalar pacotes:
 ```
-$ npx expo install
+$ yarn install
 ```
 
 Rodar no emulador Expo Go:
