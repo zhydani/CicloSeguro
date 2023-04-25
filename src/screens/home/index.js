@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Linking from 'expo-linking';
+// import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
 import { addDoc, collection } from "firebase/firestore";
+import * as geofire from 'geofire-common';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -65,25 +66,28 @@ const HomeContent = () => {
   }
   
   const handleButtonPress = async () => {
-    setLoad(true);
-    const location = await getLocation();
+    // setLoad(true);
+    // const location = await getLocation();
     
     const contacts = await getSavedContacts();
     const numbers = contacts.map((c) => c?.number);
-    // const randomLocation = generateRandomLocation();
+    // const hash = geofire.geohashForLocation([location.latitude, location.longitude]);
+    const randomLocation = generateRandomLocation();
+    const hash = geofire.geohashForLocation([randomLocation.latitude, randomLocation.longitude]);
     
-    let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
+    // let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
     setLabelAlert('Mensagem enviada');
     setIconAlert('send');
     setIconColorAlert('#FF5D8F');
     setControlAlert(true);
-    Linking.openURL(url);
+    // Linking.openURL(url);
 
     const data = {
       data: new Date(),
       descricao: "Essa é uma ocorrência de teste",
-      latitude: location.latitude,
-      longitude: location.longitude,
+      geohash: hash,
+      latitude: randomLocation.latitude,
+      longitude: randomLocation.longitude,
     };
 
     addDoc(colRef, data)

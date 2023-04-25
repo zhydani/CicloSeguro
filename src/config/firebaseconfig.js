@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
+import * as geofire from 'geofire-common';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -14,5 +15,14 @@ const firebaseConfig = {
   
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+
+const colRef = collection(db, "ocorrencias");
+
+// Palmas - TO
+const center = [-10.249091, -48.324285];
+const radiusInKm = 10;
+
+const bounds = geofire.geohashQueryBounds(center, radiusInKm);
+// criar uma consulta que busca as ocorrências dentro do raio de distância
 
 export default db;
