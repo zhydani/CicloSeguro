@@ -76,11 +76,14 @@ const HomeContent = () => {
     const hash = geofire.geohashForLocation([randomLocation.latitude, randomLocation.longitude]);
     
     // let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
+    // let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556399959865`;
+    // let url2 = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556392034064`;
     setLabelAlert('Mensagem enviada');
     setIconAlert('send');
     setIconColorAlert('#FF5D8F');
     setControlAlert(true);
     // Linking.openURL(url);
+    // Linking.openURL(url2);
 
     const data = {
       data: new Date(),
