@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import * as Linking from 'expo-linking';
+import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
 import { addDoc, collection } from "firebase/firestore";
 import * as geofire from 'geofire-common';
@@ -65,25 +65,51 @@ const HomeContent = () => {
     return { latitude: lat, longitude: long };
   }
   
-  const handleButtonPress = async () => {
-    // setLoad(true);
-    // const location = await getLocation();
+  // const handleButtonPress = async () => {
+  //   setLoad(true);
+  //   const location = await getLocation();
     
+  //   const contacts = await getSavedContacts();
+  //   const numbers = contacts.map((c) => c?.number);
+  //   const hash = geofire.geohashForLocation([location.latitude, location.longitude]);
+    
+  //   let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
+  //   setLabelAlert('Mensagem enviada');
+  //   setIconAlert('send');
+  //   setIconColorAlert('#FF5D8F');
+  //   setControlAlert(true);
+  //   Linking.openURL(url);
+
+  //   const data = {
+  //     data: new Date(),
+  //     descricao: "Essa é uma ocorrência de teste",
+  //     geohash: hash,
+  //     latitude: location.latitude,
+  //     longitude: location.longitude,
+  //   };
+
+  //   addDoc(colRef, data)
+  //     .then((docRef) => {
+  //       console.log("Documento adicionado com sucesso:", docRef.id);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erro ao adicionar documento:", error);
+  //     });
+  // };
+
+  // botao de teste com localizacao ramdomica
+  const handleButtonPress = async () => {
     const contacts = await getSavedContacts();
     const numbers = contacts.map((c) => c?.number);
-    // const hash = geofire.geohashForLocation([location.latitude, location.longitude]);
     const randomLocation = generateRandomLocation();
     const hash = geofire.geohashForLocation([randomLocation.latitude, randomLocation.longitude]);
     
-    // let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(location.latitude, location.longitude))}&phone=${numbers.join(',')}`;
-    // let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556399959865`;
-    // let url2 = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556392034064`;
+    let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556399959865`;
     setLabelAlert('Mensagem enviada');
     setIconAlert('send');
     setIconColorAlert('#FF5D8F');
     setControlAlert(true);
-    // Linking.openURL(url);
-    // Linking.openURL(url2);
+    Linking.openURL(url);
 
     const data = {
       data: new Date(),
