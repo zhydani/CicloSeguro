@@ -52,10 +52,10 @@ const HomeContent = () => {
   // gera localizacao aleatoria
   function generateRandomLocation() {
     // Define a faixa de latitude e longitude para Palmas, Tocantins
-    const latMin = -10.3667;
-    const latMax = -10.1414;
-    const longMin = -48.4078;
-    const longMax = -48.2094;
+    const latMin = -10.2600597;
+    const latMax = -10.1689;
+    const longMin = -48.3472344;
+    const longMax = -48.32766;
   
     // Gera números aleatórios dentro da faixa de latitude e longitude
     const lat = Math.random() * (latMax - latMin) + latMin;
