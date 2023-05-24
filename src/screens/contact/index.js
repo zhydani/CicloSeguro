@@ -28,7 +28,7 @@ function ContactManageContent() {
           setContacts(JSON.parse(contacts));
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     getContacts();
@@ -130,7 +130,7 @@ function ContactManageContent() {
                   </Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.contactIcon} onPress={() => handleRemoveContact(index)}>
+            <TouchableOpacity style={styles.contactIcon} onPress={() => handleRemoveContact(index)} testID='remove-contact-button'>
               <Icon name="trash" size={25} color="red"/>
             </TouchableOpacity>
           </View>

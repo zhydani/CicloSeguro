@@ -9,7 +9,7 @@ const ContactItem = ({contact}) => {
             <View style={styles.imgCon}>
                 <View style={styles.placeholder}>
                 <Text style={styles.txt}>
-                    {contact?.name[0].toUpperCase()}
+                    {contact && contact.name ? contact.name[0].toUpperCase() : ''}
                 </Text>
                 </View>
             </View>

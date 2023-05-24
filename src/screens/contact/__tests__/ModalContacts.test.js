@@ -1,40 +1,191 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
-import React from 'react';
+import * as Contacts from 'expo-contacts';
+import { default as React } from 'react';
 import ModalContacts from '../ModalContacts';
 
 jest.mock('expo-contacts', () => ({
-  requestPermissionsAsync: jest.fn().mockResolvedValue({ status: 'granted' }),
-  getContactsAsync: jest.fn().mockResolvedValue({ data: [] }),
+  requestPermissionsAsync: jest.fn(),
+  getContactsAsync: jest.fn(),
 }));
 
 describe('ModalContacts', () => {
-  it('should render and open the modal when "Adicionar Contato" button is pressed', async () => {
-    const onAddContact = jest.fn();
-    const { getByText, queryByPlaceholderText } = render(<ModalContacts onAddContact={onAddContact} />);
+  it('should render contacts and add new contact', async () => {
+    const mockContacts = [
+      { id: '1', name: 'John Doe', phoneNumbers: [{ digits: '123456789' }] },
+      { id: '2', name: 'Jane Smith', phoneNumbers: [{ digits: '987654321' }] },
+    ];
 
-    // Clica no botão "Adicionar Contato" para abrir o modal
-    fireEvent.press(getByText('Adicionar Contato'));
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: mockContacts });
 
-    // Verifica se o campo de busca está sendo renderizado
-    expect(queryByPlaceholderText('Buscar contato')).toBeTruthy();
-  });
+    const handleAddContact = jest.fn();
 
-  it('should close modal when "Fechar" button is pressed', async () => {
-    const onAddContact = jest.fn();
-    const { getByText, queryByPlaceholderText, getByTestId } = render(<ModalContacts onAddContact={onAddContact} />);
+    const { getByTestId, getByText, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
 
-    // Clica no botão "Adicionar Contato" para abrir o modal
     fireEvent.press(getByTestId('add-contact-button'));
 
-    // Verifica se o campo de busca está sendo renderizado
-    expect(queryByPlaceholderText('Buscar contato')).toBeTruthy();
-
-    // Clica no botão "Fechar" para fechar o modal
-    fireEvent.press(getByText('Fechar'));
-
-    // Verifica se o campo de busca não está mais sendo renderizado
     await waitFor(() => {
-      expect(queryByPlaceholderText('Buscar contato')).toBeFalsy();
+      expect(getByText('John Doe')).toBeTruthy();
+      expect(getByText('Jane Smith')).toBeTruthy();
     });
+
+    fireEvent.press(getByText('John Doe'));
+
+    expect(handleAddContact).toHaveBeenCalledWith({
+      id: '1',
+      name: 'John Doe',
+      number: '123456789',
+    });
+  });
+
+  it('should close the modal when pressing the close button', async () => {
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: [] });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    expect(queryByText('John Doe')).toBeNull();
+    expect(queryByText('Jane Smith')).toBeNull();
+
+    fireEvent.press(getByTestId('close-modal-button'));
+
+    await waitFor(() => {
+      expect(queryByText('John Doe')).toBeNull();
+      expect(queryByText('Jane Smith')).toBeNull();
+    });
+  });
+
+  it('should close the modal when pressing the fechar button', async () => {
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: [] });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    expect(queryByText('John Doe')).toBeNull();
+    expect(queryByText('Jane Smith')).toBeNull();
+
+    fireEvent.press(getByTestId('fechar-modal-button'));
+
+    await waitFor(() => {
+      expect(queryByText('John Doe')).toBeNull();
+      expect(queryByText('Jane Smith')).toBeNull();
+    });
+  });
+
+  it('should filter contacts based on search text', async () => {
+    const mockContacts = [
+      { id: '1', name: 'John Doe', phoneNumbers: [{ digits: '123456789' }] },
+      { id: '2', name: 'Jane Smith', phoneNumbers: [{ digits: '987654321' }] },
+    ];
+
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: mockContacts });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, getByPlaceholderText, getByText, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    await waitFor(() => {
+      expect(getByText('John Doe')).toBeTruthy();
+      expect(getByText('Jane Smith')).toBeTruthy();
+    });
+
+    fireEvent.changeText(getByPlaceholderText('Buscar contato'), 'John');
+
+    expect(getByText('John Doe')).toBeTruthy();
+    expect(queryByText('Jane Smith')).toBeNull();
+  });
+});
+
+jest.mock('expo-contacts', () => ({
+  requestPermissionsAsync: jest.fn(),
+  getContactsAsync: jest.fn(),
+}));
+
+describe('ModalContacts', () => {
+  it('should render contacts and add new contact', async () => {
+    const mockContacts = [
+      { id: '1', name: 'John Doe', phoneNumbers: [{ digits: '123456789' }] },
+      { id: '2', name: 'Jane Smith', phoneNumbers: [{ digits: '987654321' }] },
+    ];
+
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: mockContacts });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, getByText, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    await waitFor(() => {
+      expect(getByText('John Doe')).toBeTruthy();
+      expect(getByText('Jane Smith')).toBeTruthy();
+    });
+
+    fireEvent.press(getByText('John Doe'));
+
+    expect(handleAddContact).toHaveBeenCalledWith({
+      id: '1',
+      name: 'John Doe',
+      number: '123456789',
+    });
+  });
+
+  it('should close the modal when pressing the close button', async () => {
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: [] });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    expect(queryByText('John Doe')).toBeNull();
+    expect(queryByText('Jane Smith')).toBeNull();
+
+    fireEvent.press(getByTestId('close-modal-button'));
+
+    await waitFor(() => {
+      expect(queryByText('John Doe')).toBeNull();
+      expect(queryByText('Jane Smith')).toBeNull();
+    });
+  });
+
+  it('should filter contacts based on search text', async () => {
+    const mockContacts = [
+      { id: '1', name: 'John Doe', phoneNumbers: [{ digits: '123456789' }] },
+      { id: '2', name: 'Jane Smith', phoneNumbers: [{ digits: '987654321' }] },
+    ];
+
+    Contacts.requestPermissionsAsync.mockResolvedValue({ status: 'granted' });
+    Contacts.getContactsAsync.mockResolvedValue({ data: mockContacts });
+
+    const handleAddContact = jest.fn();
+
+    const { getByTestId, getByPlaceholderText, getByText, queryByText } = render(<ModalContacts onAddContact={handleAddContact} />);
+
+    fireEvent.press(getByTestId('add-contact-button'));
+
+    await waitFor(() => {
+      expect(getByText('John Doe')).toBeTruthy();
+      expect(getByText('Jane Smith')).toBeTruthy();
+    });
+
+    fireEvent.changeText(getByPlaceholderText('Buscar contato'), 'John');
+
+    expect(getByText('John Doe')).toBeTruthy();
+    expect(queryByText('Jane Smith')).toBeNull();
   });
 });

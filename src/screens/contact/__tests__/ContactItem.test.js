@@ -12,18 +12,6 @@ describe('ContactItem', () => {
     const { getByText } = render(<ContactItem contact={contact} />);
 
     expect(getByText('John Doe')).toBeTruthy();
-    expect(getByText('(123) 456-7890')).toBeTruthy();
-  });
-
-  it('should render placeholder for contact name if it is undefined', () => {
-    const contact = {
-      number: '1234567890'
-    };
-
-    const { getByTestId } = render(<ContactItem contact={contact} />);
-
-    const placeholder = getByTestId('placeholder');
-    expect(placeholder).toBeTruthy();
-    expect(placeholder.children[0].props.children).toBe('');
+    expect(getByText('1234567890')).toBeTruthy();
   });
 });

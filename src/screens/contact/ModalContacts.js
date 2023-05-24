@@ -93,7 +93,7 @@ function ModalContacts({ onAddContact }) {
       <Modal style={styles.centeredView} animationType="slide" visible={modalVisible} transparent>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TouchableOpacity style={styles.closeBtn} onPress={() => setModalVisible(false)}>
+            <TouchableOpacity style={styles.closeBtn} onPress={() => setModalVisible(false)} testID='close-modal-button'>
                 <IconClose name="close" size={25} color="black"/>
             </TouchableOpacity>
             <View style={styles.inputView}>
@@ -114,7 +114,7 @@ function ModalContacts({ onAddContact }) {
             />
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(false)}>
+              onPress={() => setModalVisible(false)} testID='fechar-modal-button'>
               <Text style={styles.textStyle}>Fechar</Text>
             </Pressable>
           </View>
