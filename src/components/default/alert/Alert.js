@@ -19,12 +19,12 @@ function Alert({controlAlert, label, onPress, size, nameIcon, colorIcon}) {
             visible={control}
             style={styles.modal}
         >
-            <View style={styles.container}>
+            <View style={styles.container} testID="alert-modal">
                 <View style={styles.subContainer}>
-                    <TouchableOpacity style={styles.closeBtn} onPress={() => onPress()}>
+                    <TouchableOpacity style={styles.closeBtn} onPress={() => onPress()} testID="close-button">
                         <Icon name="close" size={25} color="black"/>
                     </TouchableOpacity>
-                    <Text style={styles.iconAlert}>
+                    <Text style={styles.iconAlert} testID="alert-icon">
                         <FontAwesome name={nameIcon} size={70} color={colorIcon}/>
                     </Text>
                     <Text style={styles.label} size={size}>
