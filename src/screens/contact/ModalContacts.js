@@ -37,10 +37,10 @@ function ModalContacts({ onAddContact }) {
       setSearchText('');
     }
     (async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
+      const { status } = await Contacts.requestPermissionsAsync() || {};
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers]
+          fields: ['phoneNumbers']
         });
 
         if (data && data.length > 0) {
@@ -85,7 +85,9 @@ function ModalContacts({ onAddContact }) {
     <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={openContactsModal}>
+        onPress={openContactsModal}
+        testID="add-contact-button"
+      >
         <Text style={styles.textStyle}><Icon name="plus" size={20} color="white"/> Adicionar Contato</Text>
       </Pressable>
       <Modal style={styles.centeredView} animationType="slide" visible={modalVisible} transparent>
