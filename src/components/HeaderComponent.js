@@ -16,22 +16,25 @@ const [revealed, setRevealed] = useState(false);
         <Backdrop
         revealed={revealed}
         style={styles.header}
+        testID="backdrop"
         header={
-            <SafeAreaView>
+            <SafeAreaView revealed={revealed} testID="backdrop">
                 <AppBar
                     title="Ciclo Seguro"
                     titleStyle={styles.title}
                     transparent
                     style={styles.appBar}
                     leading={props => (
-                    <IconButton
-                        style={styles.iconButton}
-                        icon={props => (
-                        <Icon name={revealed ? "close" : "menu"} {...props} size={38}/>
-                        )}
-                        onPress={() => setRevealed(prevState => !prevState)}
-                        {...props}
-                    />
+                        <IconButton
+                            style={styles.iconButton}
+                            icon={props => (
+                                <Icon name={revealed ? "close" : "menu"} {...props} size={38}/>
+                            )}
+                            onPress={() => setRevealed(prevState => !prevState)}
+                            {...props}
+                            name="menu-button"
+                            testID="menu-button"
+                        />
                     )}
                 />
             </SafeAreaView>

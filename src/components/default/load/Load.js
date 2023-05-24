@@ -18,6 +18,7 @@ function Load(props) {
         <ActivityIndicator 
           size={'large'} 
           color={'#FF5D8F'}
+          testID='activity-indicator'
         />
         <Text style={styles.label}>
           Carregando localização...

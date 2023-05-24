@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684891573822" clover="3.2.0">
-  <project timestamp="1684891573822" name="All files">
-    <metrics statements="200" coveredstatements="6" conditionals="50" coveredconditionals="0" methods="58" coveredmethods="3" elements="308" coveredelements="9" complexity="0" loc="200" ncloc="200" packages="11" files="21" classes="21"/>
+<coverage generated="1684936871799" clover="3.2.0">
+  <project timestamp="1684936871799" name="All files">
+    <metrics statements="200" coveredstatements="22" conditionals="50" coveredconditionals="4" methods="58" coveredmethods="12" elements="308" coveredelements="38" complexity="0" loc="200" ncloc="200" packages="11" files="21" classes="21"/>
     <package name="CicloSeguro">
       <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="App.js" path="C:\Users\zhyda\Documents\CicloSeguro\App.js">
@@ -18,22 +18,22 @@
       </file>
     </package>
     <package name="CicloSeguro.src.components">
-      <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="10" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="8" coveredmethods="6"/>
       <file name="HeaderComponent.js" path="C:\Users\zhyda\Documents\CicloSeguro\src\components\HeaderComponent.js">
-        <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="31" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
       </file>
       <file name="MenuComponent.js" path="C:\Users\zhyda\Documents\CicloSeguro\src\components\MenuComponent.js">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="9" count="0" type="stmt"/>
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="9" count="3" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
     </package>
     <package name="CicloSeguro.src.components.default.alert">
@@ -52,26 +52,26 @@
       </file>
     </package>
     <package name="CicloSeguro.src.components.default.empty">
-      <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="ListEmpty.js" path="C:\Users\zhyda\Documents\CicloSeguro\src\components\default\empty\ListEmpty.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
     </package>
     <package name="CicloSeguro.src.components.default.load">
-      <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="Load.js" path="C:\Users\zhyda\Documents\CicloSeguro\src\components\default\load\Load.js">
-        <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="14" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
       <file name="Styles.js" path="C:\Users\zhyda\Documents\CicloSeguro\src\components\default\load\Styles.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
       </file>
     </package>
     <package name="CicloSeguro.src.config">
