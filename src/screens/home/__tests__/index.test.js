@@ -31,10 +31,5 @@ describe('HomeScreen component', () => {
     await waitFor(() => expect(getByText('Mensagem enviada')).toBeDefined());
 
     expect(getByText('Mensagem enviada')).toBeDefined();
-    // expect(getByTestId('close-button')).toBeDefined();
-    // expect(getByTestId('close-button')).toHaveTextContent('close');
-
-    // fireEvent.press(getByTestId('close-button'));
-    // await waitFor(() => expect(getByTestId('close-button')).not.toBeDefined());
   });
 });
