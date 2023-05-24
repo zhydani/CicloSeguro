@@ -21,7 +21,7 @@ function Alert({controlAlert, label, onPress, size, nameIcon, colorIcon}) {
         >
             <View style={styles.container}>
                 <View style={styles.subContainer}>
-                    <TouchableOpacity style={styles.closeBtn} onPress={() => onPress()}>
+                    <TouchableOpacity style={styles.closeBtn} onPress={() => onPress()} testID='close-button'>
                         <Icon name="close" size={25} color="black"/>
                     </TouchableOpacity>
                     <Text style={styles.iconAlert}>

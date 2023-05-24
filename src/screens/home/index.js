@@ -169,7 +169,7 @@ const HomeContent = () => {
         onPress={() => setControlAlert(!controlAlert)}
       />
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
+        <TouchableOpacity style={styles.button} onPress={handleButtonPress} testID='location-button'>
           <Icon name="location-pin" size={60} color="white"/>
         </TouchableOpacity>
       </View>
