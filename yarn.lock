@@ -4444,6 +4444,11 @@ expo-modules-core@1.2.6:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
+expo-sms@~11.2.1:
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/expo-sms/-/expo-sms-11.2.1.tgz#05719f30c6fc2bd827058c1219258fbbe6ecd991"
+  integrity sha512-ZvPSMsbDYlTK+35B4L/hl239xpKYasLo4+0D5cNSUUssv90x2dEOXeInqCPvvJHejNOYfj3ZDrRbf9LsdDVa5A==
+
 expo-status-bar@~1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.4.4.tgz#6874ccfda5a270d66f123a9f220735a76692d114"

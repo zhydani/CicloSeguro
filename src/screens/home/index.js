@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
+import { sendSMSAsync } from 'expo-sms';
 import { addDoc, collection } from "firebase/firestore";
 import * as geofire from 'geofire-common';
 import React, { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import Alert from '../../components/default/alert/Alert';
 import Load from '../../components/default/load/Load';
 import db from '../../config/firebaseconfig';
 import styles from './Styles';
+
 
 const colRef = collection(db, "ocorrencias");
 
@@ -103,12 +105,35 @@ const HomeContent = () => {
     const numbers = contacts.map((c) => c?.number);
     const randomLocation = generateRandomLocation();
     const hash = geofire.geohashForLocation([randomLocation.latitude, randomLocation.longitude]);
+
+    // enviar via SMS
+    const message = `Socorro! Estou em perigo.\n\nMinha localização é: https://www.google.com/maps/search/?api=1&query=${randomLocation.latitude},${randomLocation.longitude}`;
+    const recipients = numbers.join(',');
+    console.log(recipients)
+    try {
+      const { result } = await sendSMSAsync([recipients], message); // Corrigido o formato dos argumentos
+
+  
+      if (result === 'sent') {
+        setLabelAlert('Mensagem enviada por SMS');
+        setIconAlert('send');
+        setIconColorAlert('#FF5D8F');
+        setControlAlert(true);
+      } else {
+        setLabelAlert('Erro ao enviar mensagem');
+        setIconAlert('close');
+        setIconColorAlert('red');
+        setControlAlert(true);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+    }
     
     let url = `whatsapp://send?text=${encodeURIComponent(messageWhatsapp(randomLocation.latitude, randomLocation.longitude))}&phone=556399959865`;
-    setLabelAlert('Mensagem enviada');
-    setIconAlert('send');
-    setIconColorAlert('#FF5D8F');
-    setControlAlert(true);
+    // setLabelAlert('Mensagem enviada');
+    // setIconAlert('send');
+    // setIconColorAlert('#FF5D8F');
+    // setControlAlert(true);
     Linking.openURL(url);
 
     const data = {
